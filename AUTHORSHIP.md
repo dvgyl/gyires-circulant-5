@@ -46,7 +46,7 @@ A Lean proof certifies the statement that Lean checks; whether that statement ma
 The conjecture is due to B. Gyires (1978), and its statement is taken from the survey of G.-S. Cheon and I. M. Wanless (2005, Conjecture 20). Earlier work credited in the paper:
 
 - D. K. Chang proved the inequality for $`n=3`$ (Linear and Multilinear Algebra 26, 1990).
-- C. Ozols proved the case $`n=4`$ in 2026, with a Lean formalization ([cozuya/gyires-permanent-4x4](https://github.com/cozuya/gyires-permanent-4x4)); its proof of the comparison $`2\operatorname{per}(MN^{\mathsf T})\le\operatorname{per}(MM^{\mathsf T})+\operatorname{per}(NN^{\mathsf T})`$ is adapted in `lean/Circulant5/PermanentGram.lean`, under the Apache License 2.0.
+- C. Ozols proved the case $`n=4`$ in 2026, with a Lean formalization ([cozuya/gyires-permanent-4x4](https://github.com/cozuya/gyires-permanent-4x4)); its proof of the comparison $`2\mathrm{per}(MN^{\mathsf T})\le\mathrm{per}(MM^{\mathsf T})+\mathrm{per}(NN^{\mathsf T})`$ is adapted in `lean/Circulant5/PermanentGram.lean`, under the Apache License 2.0.
 - According to Ozols's account of prior work, a catalogue of Minc's conjectures maintained by Y. Lavi announces partial results on Gyires's conjecture without proofs; that catalogue could not be consulted for this repository.
 
 The searches for earlier work were limited, and no priority is claimed.
