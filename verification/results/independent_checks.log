@@ -1,0 +1,83 @@
+== Section 2: the permanent of a circulant and the three products (Lemmas 2.1, 2.2)
+PASS  per C(w) computed from the definition equals the 26-term polynomial P
+PASS  per C(w) computed by Ryser's formula equals the 26-term polynomial P
+PASS  P has exactly 26 terms
+PASS  P has coefficient 15 on w0w1w2w3w4, and its coefficients sum to 120 = 5!
+PASS  Mathlib's circulant convention v_{i-j} has the same permanent
+PASS  Mathlib's circulant of v is the paper's circulant of v composed with negation
+PASS  C C^T = C(g)
+PASS  C^T C = C(g)
+PASS  C^2 = C(h)
+PASS  the same three identities for Mathlib's convention (with circulant v_{i-j})
+== Section 2: the defects D_s and D_G
+PASS  D_s is homogeneous of degree 10
+PASS  D_G - D_s = 12 (P(g) - P(h))
+PASS  625 per(C)^2 - 24 per(C C^T) = D_s as polynomials, with per computed from the definition
+PASS  2500 per(C)^2 - 24 [per(CC^T) + per(C^TC) + 2 per(C^2)] = 4 D_G
+PASS  D_s has negative coefficients in the original weights
+== Section 4: affine symmetry and the six chambers (Lemmas 4.1, 4.2)
+PASS  P(T_{a,b} w) = P(w) for all 20 affine maps
+PASS  g(T_{a,b} w)_k = g(w)_{ak} for all 20 affine maps
+PASS  h(T_{a,b} w)_k = h(w)_{ak+2b} for all 20 affine maps
+PASS  D_s is invariant under all 20 affine maps
+PASS  D_G is invariant under all 20 affine maps
+PASS  each of the 120 orderings is the image of exactly one canonical ordering under exactly one affine map
+== Section 4: the chamber certificate (Lemma 4.3)
+PASS  the 120 chambers were all examined
+PASS  each chamber polynomial has exactly 1001 = binomial(14,4) coefficients, which reassemble to it
+PASS  all 120,120 coefficients are integers
+PASS  no coefficient is negative, in any of the 120 chambers
+PASS  119,520 coefficients are positive and 600 are zero (996 and 5 per chamber)
+PASS  the zero coefficients are exactly those of z0^10 and z0^9 zj, in every chamber
+PASS  the least positive coefficient is 484
+PASS  the coefficients of z1^10, z2^10, z3^10, z4^10 are 233296, 44209, 484, 601 in every chamber
+PASS  D_s - 484 (z1^10 + z2^10 + z3^10 + z4^10) has nonnegative coefficients in every chamber
+PASS  table of Section 4: each canonical chamber has 996 positive and 5 zero coefficients, least positive 484
+== Section 2: the comparison of permanents (Lemma 2.3, Corollary 2.4)
+PASS  2 per(M N^T) <= per(M M^T) + per(N N^T) for 200 random rational matrices of orders 1 to 5
+PASS  the occupancy identity per(M N^T) = sum alpha! m_alpha n_alpha (24 random integer pairs, orders 1 to 4)
+PASS  P(h(w)) <= P(g(w)) for 300 random real (signed rational) weight vectors
+== Section 3: the main results on random weights (Theorems 3.1, 3.2, Corollary 3.3)
+PASS  permanents from the definition agree with Ryser's formula (2000 weight vectors)
+PASS  24 per(CC^T) <= 625 per(C)^2 for 2000 nonnegative weight vectors, including zeros and ties
+PASS  equality holds exactly for the 48 constant vectors among them
+PASS  625 per(C)^2 - 24 per(CC^T) >= 484 (z1^10 + ... + z4^10) in sorted-gap coordinates
+PASS  Gyires's homogeneous inequality and its equality case on the same vectors
+PASS  after normalization the circulant is doubly stochastic
+PASS  after normalization the denominator is positive
+PASS  after normalization the ratio is at least 24/625 = 5!/5^5
+PASS  after normalization the ratio equals 24/625 exactly at the uniform matrix
+PASS  5!/5^5 = 24/625
+PASS  at J_5 the ratio is exactly 24/625
+PASS  per(J_5) = 24/625
+PASS  row sums of C(w) all equal w0+...+w4
+PASS  column sums of C(w) all equal w0+...+w4
+== Theorem 3.2 and Section 6: sharpness and the two-point example
+PASS  for w = (t,t,0,0,0): P(w) = 2 t^5
+PASS  for w = (t,t,0,0,0): g = (2t^2, t^2, 0, 0, t^2) and h = (t^2, 2t^2, t^2, 0, 0)
+PASS  for w = (t,t,0,0,0): P(g) = P(h) = 84 t^10
+PASS  for w = (t,t,0,0,0): D_s = D_G = 484 t^10
+PASS  for w = (t,t,0,0,0): the Gyires denominator is 336 t^10
+PASS  for w = (t,t,0,0,0): the sorted gaps are (0,0,0,t,0)
+PASS  for t = 1/2: per C = 1/16, per(CC^T) = per(C^2) = 21/256
+PASS  for t = 1/2: the normalized ratio is 1/21
+PASS  for t = 1/2: per(CC^T) > per(C)
+PASS  1/21 > 24/625
+PASS  Newman's order-four example (I+Q)/2: per A = 1/8 < 9/64 = per(AA^T)
+PASS  in the chamber 01234 at z = (0,0,0,1,0), D_s = 484 = 484 (z1^10+...+z4^10)
+PASS  the weights of that point, (0,0,0,1,1), are an affine image of (1,1,0,0,0)
+== Sections 1 and 6: remarks
+PASS  real circulants are normal
+PASS  C(w) = sum_k w_k Q^k with Q the cyclic permutation matrix
+PASS  n^n/n! = 625/24 for n = 5
+PASS  n = 2: per A = s and per(AA^T) = per(A^TA) = per(A^2) = s^2 + t^2
+PASS  n = 2: 4 per(A)^2 - (2!/2^2) den = 2 (s^2 - t^2) = 2 (2a-1)^2 (s + t), and s + t = 1
+PASS  D_s(c 1 + eps u) has no terms of degree 0 or 1 in eps
+PASS  the strong form holds for 1080 random nonnegative circulants of orders 2 to 8
+PASS  random matrices of orders 2 to 6 (2500) are doubly stochastic
+PASS  no counterexample to the strong form among 2500 random doubly stochastic matrices of orders 2 to 6
+PASS  no counterexample to Gyires's inequality among the same 2500 matrices
+PASS  for n = 3, 5, 7 the affine group of Z/nZ has (n-2)! orbits on the orderings
+
+checks passed: 72; failed: 0; expected: 72
+RESULT: PASS

@@ -1,0 +1,9 @@
+lean/.lake/
+__pycache__/
+*.pyc
+.DS_Store
+*.aux
+*.log
+!verification/results/*.log
+*.out
+*.toc

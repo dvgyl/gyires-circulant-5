@@ -1,0 +1,14 @@
+Lean files searched: 172
+tokens searched for: sorry, admit, axiom, native_decide, implemented_by, extern
+permitted occurrences (Challenge placeholders): 9
+   lean/Challenges/GyiresCirculant5.lean:70: sorry
+   lean/Challenges/GyiresCirculant5.lean:80: sorry
+   lean/Challenges/GyiresCirculant5.lean:88: sorry
+   lean/Challenges/GyiresCirculant5.lean:98: sorry
+   lean/Challenges/GyiresCirculant5.lean:108: sorry
+   lean/Challenges/GyiresCirculant5.lean:115: sorry
+   lean/Challenges/GyiresCirculant5.lean:122: sorry
+   lean/Challenges/GyiresCirculant5.lean:132: sorry
+   lean/Challenges/GyiresCirculant5.lean:142: sorry
+other occurrences: 0
+RESULT: PASS

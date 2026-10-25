@@ -1,0 +1,17 @@
+{
+  "challenge_module": "Challenges.GyiresCirculant5",
+  "solution_module": "Solutions.GyiresCirculant5",
+  "theorem_names": [
+    "GyiresCirculant5.gyires_ratio",
+    "GyiresCirculant5.gyires_ratio_eq_iff",
+    "GyiresCirculant5.gyires_denominator_pos",
+    "GyiresCirculant5.gyires_homogeneous",
+    "GyiresCirculant5.gyires_homogeneous_eq_iff",
+    "GyiresCirculant5.strong_inequality",
+    "GyiresCirculant5.strong_inequality_eq_iff",
+    "GyiresCirculant5.strong_margin",
+    "GyiresCirculant5.strong_margin_attained",
+    "GyiresCirculant5.strong_margin_sharp"
+  ],
+  "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]
+}

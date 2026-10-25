@@ -1,0 +1,99 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{microtype}
+\usepackage{fancyhdr,lastpage}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Gyires's permanent inequality for circulant matrices of order five: overview},pdfauthor={Dev D. Goyal}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\raggedbottom
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\footnotesize\scshape Gyires's inequality for circulants of order five}
+\fancyhead[R]{\footnotesize\scshape Dev D. Goyal}
+\fancyfoot[R]{\footnotesize\thepage\,/\,\pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.3pt}
+\fancypagestyle{firstpage}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\fancyfoot[R]{\footnotesize\thepage\,/\,\pageref*{LastPage}}}
+\newcommand{\per}{\operatorname{per}}
+\newcommand{\T}{\mathsf{T}}
+\begin{document}
+\thispagestyle{firstpage}
+{\LARGE\bfseries Gyires's permanent inequality for circulant matrices of order five\par}
+\vspace{4pt}
+{\large Overview of the result, its proof and its verification\par}
+\vspace{6pt}
+Dev D. Goyal \enspace\textperiodcentered\enspace October 2026 \enspace\textperiodcentered\enspace
+\href{https://github.com/dvgyl/gyires-circulant-5}{\texttt{github.com/dvgyl/gyires-circulant-5}}
+\par\bigskip
+The repository contains a proof that Gyires's permanent inequality holds for every doubly stochastic circulant matrix
+of order five, with its equality case, together with a stronger inequality for every nonnegative circulant of order
+five and a sharp quantitative margin. The proof is presented in a self-contained paper and formalized in Lean~4 with
+Mathlib; the formal proof uses only Lean's standard axioms, and all statements were also tested with exact computations
+written independently of the formal proof.
+
+The result was obtained in an AI research effort directed by Dev~D.~Goyal. ChatGPT (OpenAI, GPT-6 with Pro
+reasoning), working autonomously from Dev~D.~Goyal's prompts, proposed the problem, found the proof and wrote the Lean
+formalization. Claude Opus~5.5, used with Claude Code, checked the work independently and wrote the paper in its
+present form. Dev~D.~Goyal has reviewed the proofs; this review is not an independent expert validation. The paper has
+not been peer reviewed.
+
+\section*{1. The conjecture}
+A real square matrix is doubly stochastic if its entries are nonnegative and its row and column sums are all $1$; the
+set of such $n\times n$ matrices is $\Omega_n$, and $J_n$ is the matrix all of whose entries are $1/n$. B.~Gyires
+conjectured in 1978 that every $A\in\Omega_n$ satisfies
+\[
+\frac{4\per(A)^2}{\per(AA^\T)+\per(A^\T A)+2\per(A^2)}\ \ge\ \frac{n!}{n^n},
+\]
+with equality only at $A=J_n$ (Conjecture~20 in the survey of Cheon and Wanless, Linear Algebra Appl.\ 403, 2005). The
+case $n=2$ is elementary, the inequality for $n=3$ was proved by D.~K.~Chang in 1990, and the case $n=4$ was proved by
+C.~Ozols in 2026 with a computer-assisted proof formalized in Lean. The conjecture is open for $n\ge5$.
+
+\section*{2. The result}
+A circulant matrix of order five has entries $c_{ij}=w_{j-i}$, indices modulo five. The doubly stochastic circulants are
+the convex combinations of the five powers of the cyclic permutation matrix: a four-dimensional simplex inside the
+sixteen-dimensional polytope $\Omega_5$; this simplex contains matrices with zero entries. For every circulant $C$ of
+order five with nonnegative weights (the entries of its first row):
+\begin{itemize}
+\item the strong inequality $24\per(CC^\T)\le625\per(C)^2$ holds, with equality exactly when all five weights are
+equal;
+\item if $z_1,\dots,z_4$ are the gaps between the sorted weights, then
+$625\per(C)^2-24\per(CC^\T)\ge484\,(z_1^{10}+z_2^{10}+z_3^{10}+z_4^{10})$, and $484$ is best possible;
+\item Gyires's inequality holds for $C$, with equality exactly when all weights are equal. In particular, for every doubly
+stochastic circulant of order five the ratio of Section~1 is at least $5!/5^5=24/625$, with equality exactly at
+$J_5$.
+\end{itemize}
+
+\section*{3. The proof}
+Every circulant is normal, and $\per(C^2)\le\per(CC^\T)$ by a comparison of the form
+$2\per(MN^\T)\le\per(MM^\T)+\per(NN^\T)$, so Gyires's inequality follows from the strong inequality. The defect
+$625\per(C)^2-24\per(CC^\T)$ is a homogeneous polynomial of degree ten in the weights, invariant under the twenty affine
+changes of indices $i\mapsto ai+b$ modulo five. These reduce the $120$ orderings of the weights to six. For each of the six,
+the defect, written in the smallest weight and the gaps between consecutive sorted weights, has $1001$ coefficients,
+all nonnegative integers: $996$ are positive, the least being $484$, and five are zero. This gives the
+inequality, the margin and the equality case at once.
+
+\section*{4. Verification}
+The Lean project builds from source with Lean~4.35.0 and Mathlib~v4.35.0. Nine principal theorems are restated with
+Mathlib's definitions only. Comparator, a Lean tool that checks that a proof proves exactly a statement given in a
+separate file, confirms that the proved theorems have exactly these statements, and the proofs are accepted by Lean's
+kernel and by the independent NanoDa and con-ron kernels. The chamber certificate is checked in
+Lean coefficient by coefficient, by the \texttt{ring} and \texttt{positivity} tactics, without evaluation by compiled
+code. A separate PARI/GP script recomputes every permanent from the definition, recomputes the chamber polynomials for
+all $120$ orderings, and tests every statement of the paper.
+
+\section*{5. The paper}
+\textbf{Gyires's permanent inequality for nonnegative circulant matrices of order five.}\par
+Conjecture~20 of Cheon and Wanless for doubly stochastic circulants of order five, with its equality case; the strong
+inequality and its sharp margin for nonnegative circulants.\enspace\emph{(Special case proved.)}\par
+{\footnotesize\href{https://github.com/dvgyl/gyires-circulant-5/blob/main/preprints/Gyires-inequality-for-circulants-of-order-five/paper.pdf}{Paper}%
+\enspace\textperiodcentered\enspace
+\href{https://github.com/dvgyl/gyires-circulant-5/blob/main/lean/Challenges/GyiresCirculant5.lean}{Lean statements}%
+\enspace\textperiodcentered\enspace
+\href{https://github.com/dvgyl/gyires-circulant-5/blob/main/verification/README.md}{Checks}\par}
+
+The result concerns circulant matrices of order five only; Gyires's conjecture for all of $\Omega_5$ remains open. The
+searches for earlier work were limited, and no claim of novelty or priority is made.
+\end{document}
