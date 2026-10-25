@@ -3,8 +3,8 @@ Copyright (c) 2026 Chris Ozols. Licensed under the Apache License, Version 2.0.
 
 Adapted from `RequestProject/Reduction.lean` at commit
 244f48c270d0a4d0801383e15202886b384b2d67 of https://github.com/cozuya/gyires-permanent-4x4.
-Modifications: the namespace, the imports, and the circulant corollary
-`Circulant5.conv_permanent_le_gram` at the end of the file.
+Modifications: the namespace, the imports, the port to Lean 4.35 and the module system, and the
+circulant corollary `Circulant5.conv_permanent_le_gram` at the end of the file.
 -/
 module
 

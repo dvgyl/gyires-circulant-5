@@ -1,0 +1,13 @@
+Output of lean/scripts/verify-comparator.sh (lake comparator with the Lean, NanoDa and con-ron kernels). Build output and warnings are omitted.
+
+== comparator/gyires-circulant5.json
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, GyiresCirculant5.gyires_ratio, GyiresCirculant5.gyires_ratio_eq_iff, GyiresCirculant5.gyires_denominator_pos, GyiresCirculant5.gyires_homogeneous, GyiresCirculant5.gyires_homogeneous_eq_iff, GyiresCirculant5.strong_inequality, GyiresCirculant5.strong_inequality_eq_iff, GyiresCirculant5.strong_margin, GyiresCirculant5.strong_margin_attained, GyiresCirculant5.strong_margin_sharp, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Challenges.GyiresCirculant5
+Exporting #[Quot, Quot.mk, Quot.lift, Quot.ind, GyiresCirculant5.gyires_ratio, GyiresCirculant5.gyires_ratio_eq_iff, GyiresCirculant5.gyires_denominator_pos, GyiresCirculant5.gyires_homogeneous, GyiresCirculant5.gyires_homogeneous_eq_iff, GyiresCirculant5.strong_inequality, GyiresCirculant5.strong_inequality_eq_iff, GyiresCirculant5.strong_margin, GyiresCirculant5.strong_margin_attained, GyiresCirculant5.strong_margin_sharp, propext, Quot.sound, Classical.choice, Nat.add, Nat.sub, Nat.mul, Nat.pow, Nat.gcd, Nat.div, Nat.mod, Nat.beq, Nat.ble, Nat.land, Nat.lor, Nat.xor, Nat.shiftLeft, Nat.shiftRight, String.ofList, Char.ofNat, List, eagerReduce, Nat, String, String.mk, Char, optParam, autoParam, semiOutParam, outParam] from Solutions.GyiresCirculant5
+Running con-ron kernel on solution
+con-ron: accepted 19301 declarations (--verified)
+con-ron kernel accepts the solution
+Running nanoda kernel on solution
+nanoda kernel accepts the solution
+Running Lean default kernel on solution
+Lean default kernel accepts the solution
+Your solution is okay!

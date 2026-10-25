@@ -17,7 +17,7 @@ sources:
   - title: "Gyires's permanent inequality for nonnegative circulant matrices of order five, presented in the paper of this repository"
     type: original-proof
     authors: ["Dev D. Goyal"]
-    location: "https://github.com/dvgyl/gyires-circulant-5/tree/main/preprints/Gyires-inequality-for-circulants-of-order-five"
+    location: "https://github.com/dvgyl/gyires-circulant-5/tree/5db204c4d1bad973beedf5a047e7cd8b63b5d3c9/preprints/Gyires-inequality-for-circulants-of-order-five"
     relationship: other
     note: "The result is first presented in this repository, in a self-contained paper that has not been peer reviewed. The proof was found by an AI system (see automation). Novelty has not been established beyond limited searches for earlier work, and no priority is claimed. The searches covered the survey of Cheon and Wanless and the works cited in the paper, general web searches for Gyires's conjecture and for permanent inequalities for circulant matrices, the account of prior work in C. Ozols's repository cozuya/gyires-permanent-4x4 (commit 244f48c, 19 October 2026), and the Lean collections google-deepmind/formal-conjectures (commit 37f0808, 24 October 2026), openai/math (commit 1581d4c, 12 October 2026) and plby/lean-proofs (commit 8822f7d, 15 September 2026). None of them treats the circulant case. Gyires's 1978 article and Y. Lavi's catalogue of Minc's conjectures (see the corresponding source) could not be consulted."
 

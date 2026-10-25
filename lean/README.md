@@ -15,7 +15,7 @@ The library `Circulant5` was written by ChatGPT (OpenAI, GPT-6 with Pro reasonin
 |---|---|
 | [`Challenges/GyiresCirculant5.lean`](Challenges/GyiresCirculant5.lean) | The principal theorems, stated with Mathlib's definitions only (`Matrix.permanent`, `Matrix.circulant`, `doublyStochastic`), with a docstring explaining each statement and its source, and with the proofs left as `sorry`. These are the statements a reader needs to audit. |
 | [`Solutions/GyiresCirculant5.lean`](Solutions/GyiresCirculant5.lean) | The same theorems, word for word, proved from the library. |
-| [`comparator/gyires-circulant5.json`](comparator/gyires-circulant5.json) | The Comparator configuration naming the nine theorems that must match. |
+| [`comparator/gyires-circulant5.json`](comparator/gyires-circulant5.json) | The Comparator configuration naming the ten theorems that must match. |
 | [`Circulant5/Definitions.lean`](Circulant5/Definitions.lean), [`MatrixProducts.lean`](Circulant5/MatrixProducts.lean), [`MatrixBridge.lean`](Circulant5/MatrixBridge.lean), [`Defects.lean`](Circulant5/Defects.lean) | The circulant `circ w`, the polynomial `P5`, the vectors `gram` and `conv`, the products of circulants, the identification of `P5` with the permanent, and the two defects. |
 | [`Circulant5/PermanentGram.lean`](Circulant5/PermanentGram.lean) | The comparison `2 per(M Nᵀ) ≤ per(M Mᵀ) + per(N Nᵀ)` and its consequence `P5 (conv w) ≤ P5 (gram w)`. |
 | [`Circulant5/OrderCover.lean`](Circulant5/OrderCover.lean), [`Symmetry.lean`](Circulant5/Symmetry.lean) | The affine maps of `ZMod 5`, the six canonical orderings, the reduction of every weight vector to a chamber, and the affine invariance of the defects. |
@@ -24,7 +24,8 @@ The library `Circulant5` was written by ChatGPT (OpenAI, GPT-6 with Pro reasonin
 | [`Circulant5/Strong0.lean`](Circulant5/Strong0.lean) to [`Strong5.lean`](Circulant5/Strong5.lean) | The margin `484 (z₁¹⁰ + ⋯ + z₄¹⁰)` in each of the six chambers. |
 | [`Circulant5/Theorems.lean`](Circulant5/Theorems.lean), [`Normalization.lean`](Circulant5/Normalization.lean), [`Corollaries.lean`](Circulant5/Corollaries.lean) | The strong inequality, Gyires's inequality, their equality cases, the positive denominator and the normalized ratio. |
 | [`Circulant5/Examples.lean`](Circulant5/Examples.lean) | The two-point example $`w=(t,t,0,0,0)`$ and the sharpness of `484` in the canonical chambers. |
-| [`Circulant5/MathlibStatements.lean`](Circulant5/MathlibStatements.lean) | The translation to Mathlib's `Matrix.circulant` and `doublyStochastic`, and the margin for an arbitrary weight vector sorted by an arbitrary permutation, with its sharpness. |
+| [`Circulant5/MathlibStatements.lean`](Circulant5/MathlibStatements.lean) | The translation to Mathlib's `Matrix.circulant` and `doublyStochastic`; the margin for an arbitrary weight vector sorted by an arbitrary permutation, with its attainment and sharpness; the uniqueness of the reduction to a canonical ordering. |
+| [`Circulant5/Remarks.lean`](Circulant5/Remarks.lean) | Remarks of the paper: the reduction of Gyires's inequality to the strong inequality for matrices of every size, the case $`n=2`$ of the conjecture, and the description of the doubly stochastic circulants of order five. |
 | [`scripts/`](scripts/) | [`verify-comparator.sh`](scripts/verify-comparator.sh), which runs Comparator on the configuration. |
 
 ## The statements checked by Comparator
@@ -33,7 +34,7 @@ The library `Circulant5` was written by ChatGPT (OpenAI, GPT-6 with Pro reasonin
 
 | Configuration | Theorems | Content |
 |---|---|---|
-| [`gyires-circulant5.json`](comparator/gyires-circulant5.json) | 9 | Gyires's inequality, its equality case and the positive denominator for doubly stochastic circulants of order five; the homogeneous and the strong inequalities with their equality cases for nonnegative circulants; the margin in sorted-gap coordinates and the sharpness of its constant `484`. |
+| [`gyires-circulant5.json`](comparator/gyires-circulant5.json) | 10 | Gyires's inequality, its equality case and the positive denominator for doubly stochastic circulants of order five; the homogeneous and the strong inequalities with their equality cases for nonnegative circulants; the margin in sorted-gap coordinates, its attainment and the sharpness of its constant `484`. |
 
 The configuration is accepted by Lean's kernel, NanoDa and con-ron; the output is in [`../verification/results/comparator.log`](../verification/results/comparator.log).
 
@@ -46,7 +47,7 @@ lake exe cache get   # optional: download prebuilt Mathlib instead of compiling 
 lake build           # the library, the Challenge and the Solution
 ```
 
-A full build of the library compiles 169 modules; the 138 generated certificate files take most of the time.
+A full build of the library compiles 170 modules; the 138 generated certificate files take most of the time.
 
 ## Running Comparator
 
@@ -58,11 +59,12 @@ scripts/verify-comparator.sh
 
 ## Axiom audit
 
-[`../verification/AxiomAudit.lean`](../verification/AxiomAudit.lean) asks Lean for the axioms behind each theorem stated in the paper and each theorem compared with the Challenge, and then scans every theorem and definition of the library and of the Solution:
+[`../verification/AxiomAudit.lean`](../verification/AxiomAudit.lean) asks Lean for the axioms behind each theorem cited in the paper and each theorem compared with the Challenge, and then scans every declaration of the library and of the Solution; [`../verification/ScanControl.lean`](../verification/ScanControl.lean) checks that the same scan detects the `sorry` placeholders of the Challenge:
 
 ```sh
 lake env lean ../verification/AxiomAudit.lean > ../verification/results/axiom_audit.txt
 python3 ../verification/check_axioms.py ../verification/results/axiom_audit.txt
+lake env lean ../verification/ScanControl.lean
 ```
 
 Every theorem depends only on `propext`, `Classical.choice` and `Quot.sound`. Apart from the deliberate placeholders in `Challenges/`, the sources contain no `sorry`, and no `axiom`, `admit`, `native_decide`, `implemented_by` or `extern`.

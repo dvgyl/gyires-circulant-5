@@ -1,18 +1,18 @@
 # Verification
 
-This directory contains the checks of the results: an axiom audit of the Lean formalization, the Comparator check of the Challenge statements, and exact computations that test every statement of the paper. The PARI/GP computations were written independently of the Lean development.
+This directory contains the checks of the results: an axiom audit of the Lean formalization, the Comparator check of the Challenge statements, and exact computations that test every statement of the paper. The PARI/GP computations were written separately from the Lean files and from the program that generated the certificate files, and use neither.
 
 | Check | Files | Result |
 |---|---|---|
-| Axiom audit of the formal proof | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py) | 85 of 85 listed theorems, and all 1,956 theorems and definitions of the library and the Solution, use only the standard axioms |
+| Axiom audit of the formal proof | [`AxiomAudit.lean`](AxiomAudit.lean), [`check_axioms.py`](check_axioms.py), [`ScanControl.lean`](ScanControl.lean), [`scan_sources.py`](scan_sources.py) | 94 of 94 listed theorems, and all 8,035 declarations of the library and the Solution, use only the standard axioms; no escape hatch in the sources |
 | Challenge statements against their proofs | [`../lean/comparator/`](../lean/comparator/), [`../lean/scripts/verify-comparator.sh`](../lean/scripts/verify-comparator.sh) | The configuration is accepted by the Lean, NanoDa and con-ron kernels |
-| Exact computations | [`independent_checks.gp`](independent_checks.gp) | 68 of 68 checks pass |
+| Exact computations | [`independent_checks.gp`](independent_checks.gp) | 72 of 72 checks pass |
 
 The outputs are in [`results/`](results/).
 
 ## Axiom audit
 
-The Lean project in [`../lean/`](../lean/) was built from source with Lean 4.35.0 and Mathlib v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` ([`results/lean_build.log`](results/lean_build.log)). [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms` on the 9 theorems in [`../lean/Solutions/`](../lean/Solutions/) that are compared with the Challenge statements and on 76 theorems of the library, which include every theorem the paper cites. It then scans every theorem and definition of the modules `Circulant5.*` and `Solutions.*`, including the auxiliary and generated ones, with Lean's `collectAxioms`. [`check_axioms.py`](check_axioms.py) confirms that every listed theorem is reported, that it depends only on `propext`, `Classical.choice` and `Quot.sound`, and that the scan finds no other axiom; an unfinished proof would appear as `sorryAx`, and a proof by `native_decide` as `Lean.ofReduceBool`. The output is in [`results/axiom_audit.txt`](results/axiom_audit.txt) and the verdict in [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt). A text search of the sources ([`results/source_scan.txt`](results/source_scan.txt)) finds no `sorry` outside the Challenge file, and no `axiom`, `admit`, `native_decide`, `implemented_by` or `extern`.
+The Lean project in [`../lean/`](../lean/) was built from source with Lean 4.35.0 and Mathlib v4.35.0, commit `56a005855ea17e0b0958f73ec801ae140b0a1679` ([`results/lean_build.log`](results/lean_build.log)). [`AxiomAudit.lean`](AxiomAudit.lean) runs `#print axioms` on the 10 theorems in [`../lean/Solutions/`](../lean/Solutions/) that are compared with the Challenge statements and on 84 theorems of the library, which include every theorem the paper cites. It then scans all 8,035 declarations of the modules `Circulant5.*` and `Solutions.*`, including the auxiliary and generated ones, with Lean's `collectAxioms`. Under Lean's module system an importing file sees imported theorems without their proofs, so the scan relies on the axiom lists that Lean records for each declaration when its module is compiled; [`ScanControl.lean`](ScanControl.lean) runs the same scan on the Challenge module and finds that all 10 of its declarations depend on `sorryAx` ([`results/scan_control.txt`](results/scan_control.txt)), which shows that the scan sees through imports. [`check_axioms.py`](check_axioms.py) confirms that every listed theorem is reported, that it depends only on `propext`, `Classical.choice` and `Quot.sound`, and that the scan finds no other axiom; an unfinished proof would appear as `sorryAx`, and a proof by `native_decide` as `Lean.ofReduceBool`. The output is in [`results/axiom_audit.txt`](results/axiom_audit.txt) and the verdict in [`results/axiom_audit_check.txt`](results/axiom_audit_check.txt). A text search of all Lean sources, with comments and strings removed ([`scan_sources.py`](scan_sources.py), output in [`results/source_scan.txt`](results/source_scan.txt)), finds no `sorry` outside the Challenge file, and no `axiom`, `admit`, `native_decide`, `implemented_by` or `extern`.
 
 A formal proof certifies the statement that Lean checks. The Lean statements were therefore also compared with Gyires's conjecture as stated by Cheon and Wanless. The Challenge uses Mathlib's permanent, transpose, doubly stochastic matrices and circulant matrices. These differ from the formulations of the paper and of Cheon and Wanless only by equivalent conventions, which are listed under `fidelity` in [`../lean/formalization.yaml`](../lean/formalization.yaml).
 
@@ -33,8 +33,8 @@ The principal theorems are stated a second time in [`../lean/Challenges/GyiresCi
    - the least positive coefficient is 484, and the coefficients of $`z_1^{10},\dots,z_4^{10}`$ are 233,296, 44,209, 484 and 601;
    - the coefficients remain nonnegative after the margin $`484\,(z_1^{10}+\dots+z_4^{10})`$ is subtracted;
 5. tests the comparison $`2\operatorname{per}(MN^{\mathsf T})\le\operatorname{per}(MM^{\mathsf T})+\operatorname{per}(NN^{\mathsf T})`$ on 200 random rational matrices of orders 1 to 5, the occupancy identity of its proof on 24 random integer pairs, and its consequence $`P(h)\le P(g)`$ on 300 random signed weight vectors;
-6. tests the strong inequality, the margin, Gyires's inequality in homogeneous and normalized form, the positivity of the denominator, and the equality cases, on 2,000 nonnegative weight vectors, many of them with zero or repeated weights;
-7. checks the two-point example and the sharpness of 484, and every remark of the Introduction and of the Discussion: the case $`n=2`$, the vanishing of the defect to second order along the constant vectors, the absence of counterexamples to the strong inequality among 1,080 random nonnegative circulants of orders 2 to 8, and the count of $`(n-2)!`$ chambers for $`n=3,5,7`$.
+6. tests the strong inequality, the margin, Gyires's inequality in homogeneous and ratio form, the positivity of the denominator, and the equality cases, on 2,000 nonnegative weight vectors, many of them with zero or repeated weights;
+7. checks the two-point example and the sharpness of 484, Newman's example of order four, and every remark of the Introduction and of the Discussion: the case $`n=2`$, the vanishing of the defect to second order along the constant vectors, the absence of counterexamples to the strong inequality among 1,080 random nonnegative circulants of orders 2 to 8 and among 2,500 random doubly stochastic matrices of orders 2 to 6 (also for Gyires's inequality), and the count of $`(n-2)!`$ chambers for $`n=3,5,7`$.
 
 The script prints one line per check and exits with a nonzero status if a check fails or if fewer checks than expected have run. The output is in [`results/independent_checks.log`](results/independent_checks.log).
 
@@ -46,7 +46,11 @@ The chamber computation in item 4 is exact and complete; it is an independent re
 # from lean/, after building the project
 lake env lean ../verification/AxiomAudit.lean > ../verification/results/axiom_audit.txt
 python3 ../verification/check_axioms.py ../verification/results/axiom_audit.txt
+lake env lean ../verification/ScanControl.lean
 scripts/verify-comparator.sh               # Linux with bubblewrap
+
+# from the repository root
+python3 verification/scan_sources.py
 
 # from verification/ (PARI/GP 2.15 or later)
 gp -q independent_checks.gp < /dev/null    # about 30 seconds

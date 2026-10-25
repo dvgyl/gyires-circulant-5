@@ -8,14 +8,14 @@ The library is in [`Circulant5/`](../Circulant5/), in the namespace `Circulant5`
 
 The principal statements are restated with Mathlib's definitions only in [`Challenges/GyiresCirculant5.lean`](../Challenges/GyiresCirculant5.lean) (namespace `GyiresCirculant5`) and proved in [`Solutions/GyiresCirculant5.lean`](../Solutions/GyiresCirculant5.lean). There a circulant is `Matrix.circulant v`, with entries `v (i - j)`: the transpose of `circ v`, describing the same set of matrices.
 
-Every declaration below depends only on Lean's standard axioms (`propext`, `Classical.choice`, `Quot.sound`). The remarks in the paper's Discussion section are not formalized, except for the two-point example.
+Every declaration below depends only on Lean's standard axioms (`propext`, `Classical.choice`, `Quot.sound`). The remarks of the paper's Discussion section that rest on random tests or on the literature are not formalized.
 
 ## Statements
 
 | Statement in the paper | Lean declaration(s) |
 | --- | --- |
 | Theorem 3.1 (strong inequality and equality case) | `GyiresCirculant5.strong_inequality`, `GyiresCirculant5.strong_inequality_eq_iff`; in the library `Circulant5.strong_matrix_inequality`, `Circulant5.strong_matrix_equality_iff` |
-| Theorem 3.2 (margin and sharpness of 484) | `GyiresCirculant5.strong_margin`, `GyiresCirculant5.strong_margin_sharp`; in the library `Circulant5.strongDefect_margin`, `Circulant5.strongDefect_margin_sharp` |
+| Theorem 3.2 (margin, its attainment, sharpness of 484) | `GyiresCirculant5.strong_margin`, `GyiresCirculant5.strong_margin_attained`, `GyiresCirculant5.strong_margin_sharp`; in the library `Circulant5.strongDefect_margin`, `Circulant5.strongDefect_margin_attained`, `Circulant5.strongDefect_margin_sharp` |
 | Corollary 3.3, homogeneous form and equality case | `GyiresCirculant5.gyires_homogeneous`, `GyiresCirculant5.gyires_homogeneous_eq_iff`; `Circulant5.gyires_matrix_inequality`, `Circulant5.gyires_matrix_equality_iff` |
 | Corollary 3.3, ratio form, equality at $`J_5`$, positive denominator | `GyiresCirculant5.gyires_ratio`, `GyiresCirculant5.gyires_ratio_eq_iff`, `GyiresCirculant5.gyires_denominator_pos`; `Circulant5.normalizedGyiresRatio`, `Circulant5.normalizedGyiresRatio_eq_iff`, `Circulant5.positiveDenominator` |
 | Lemma 2.1 (products of circulants) | `Circulant5.circ_mul_transpose`, `Circulant5.transpose_mul_circ`, `Circulant5.circ_mul_self` |
@@ -26,6 +26,9 @@ Every declaration below depends only on Lean's standard axioms (`propext`, `Clas
 | Lemma 4.3 (chamber certificate: nonnegativity of $`R_\kappa`$) | `Circulant5.strong_chamber_0`, …, `Circulant5.strong_chamber_5`, `Circulant5.strong_chambers` |
 | The expansion in the smallest weight (after Lemma 4.3) | `Circulant5.P5_add_constant`, `Circulant5.gram_add_constant`, `Circulant5.strongDefect_add_constant`, `Circulant5.chamberPoly0_eval`, …, `Circulant5.chamberPoly5_eval` |
 | The two-point example $`w=(t,t,0,0,0)`$, all real $`t`$ | `Circulant5.P5_twoSupport`, `Circulant5.P5_gram_twoSupport`, `Circulant5.P5_conv_twoSupport`, `Circulant5.strongDefect_twoSupport`, `Circulant5.gyiresDefect_twoSupport`, `Circulant5.gyiresDenominator_twoSupport` |
+| Section 1.2: doubly stochastic circulants are the convex combinations of `I, Q, …, Q⁴` | `Circulant5.circulant_mem_doublyStochastic_iff`, `Circulant5.cyclicShift_pow`, `Circulant5.circulant_eq_sum_pow` |
+| Section 1.3: the case $`n=2`$ of the conjecture | `Circulant5.permanent_fin_two`, `Circulant5.gyires_two` |
+| Section 6: the strong inequality implies Gyires's inequality, every size | `Circulant5.gyires_of_strong` |
 | The example $`t=\tfrac12`$ (Discussion) | `Circulant5.permanent_twoSupport_half`, `Circulant5.permanent_gram_twoSupport_half`, `Circulant5.permanent_square_twoSupport_half`, `Circulant5.normalizedGyiresRatio_twoSupport_half` |
 
 ## Statements not formalized in Lean
